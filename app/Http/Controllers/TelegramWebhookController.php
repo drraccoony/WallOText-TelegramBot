@@ -36,7 +36,7 @@ class TelegramWebhookController extends Controller
             $streak = WallStreak::firstOrCreate(['user_id' => (string)$targetUserId]);
 
             $last = $streak->last_wall_at;
-            $days = $last ? $last->diffInDays(now()) : 0; // always an integer
+            $days = $last ? (int) $last->diffInDays(now()) : 0;
 
             $botToken = config('telegram.bot_token');
             $payload = [
