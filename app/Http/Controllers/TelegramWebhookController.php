@@ -36,7 +36,7 @@ class TelegramWebhookController extends Controller
             $streak = WallStreak::firstOrCreate(['user_id' => (string)$targetUserId]);
 
             $last = $streak->last_wall_at;
-            $days = $last ? $last->diffInDays(now()) : 0;
+            $days = $last ? $last->diffInDays(now()) : 0; // always an integer
 
             $botToken = config('telegram.bot_token');
             $payload = [
@@ -48,7 +48,6 @@ class TelegramWebhookController extends Controller
 
             Http::post("https://api.telegram.org/bot{$botToken}/sendMessage", $payload)->throw();
 
-            // Update streak timestamp
             $streak->forceFill(['last_wall_at' => now()])->save();
         }
 
