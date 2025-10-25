@@ -16,4 +16,4 @@ Route::get('/', function () {
     ]);
 });
 
-Route::post('/telegram/webhook', [TelegramWebhookController::class, 'handle']);
+// Route::post('/telegram/webhook', [TelegramWebhookController::class, 'handle']);
